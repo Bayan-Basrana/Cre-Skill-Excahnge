@@ -56,6 +56,20 @@ projectsRepository.save(old) ;
         projectsRepository.delete(projects);
     }
 
+    
+    public void deliverByTalent (Integer projectId , Integer talentId){
+        Projects projects= projectsRepository.findProjectsByProjectIdAndAndTalentId(projectId,talentId);
+            if (projects==null){
+                throw new ApiException("project not found or you not allowed to deliver this project");
+            }
+            if (!projects.getStatus().equalsIgnoreCase("inprogress")){
+                throw  new ApiException("project is not in a status allow delivery");
+            }
+            projects.setStatus("delivered");
+            projectsRepository.save(projects);
+        }
+
+
 
     public void completeProject (Integer projectId , Integer projectOwnerId) {
       Projects projects =projectsRepository.findProjectsByProjectIdAndUserid(projectId,projectOwnerId);
