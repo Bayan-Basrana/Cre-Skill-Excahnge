@@ -11,4 +11,6 @@ public interface OfferRepository extends JpaRepository<Offer,Integer> {
     Offer findOfferByOfferId (Integer offerId);
 Offer findOffersByProjectId (Integer projectId);
     List<Offer> findOfferByProjectIdOrderByBudget (Integer projectId);
+    @Query("select o from Offer o where o.projectId=?1 and o.status=?2")
+    List<Offer> findOffersByProjectIdAndAndStatus (Integer projectId ,String status);
 }
