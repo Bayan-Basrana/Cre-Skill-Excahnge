@@ -47,6 +47,14 @@ projectsService.delete(projectId);
 return ResponseEntity.status(200).body(new ApiResponse("deleted successfully"));
     }
 
+@PutMapping("/deliverByTalent/{projectId}/{talentId}")
+    public ResponseEntity deliverByTalent (@PathVariable Integer projectId ,@PathVariable Integer talentId) {
+        projectsService.deliverByTalent(projectId,talentId);
+        return ResponseEntity.status(200).body(new ApiResponse("project delivered successfully"));
+    }
+
+
+    
     @PutMapping("/completeProject/{projectId}/{projectOwnerId}")
 public ResponseEntity completeProject (@PathVariable Integer projectId ,@PathVariable Integer projectOwnerId) {
         projectsService.completeProject(projectId,projectOwnerId);
