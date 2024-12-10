@@ -95,7 +95,13 @@ Projects projects =projectsRepository.findProjectsByProjectIdAndUserid(offer.get
         projectsRepository.save(projects);
         offer.setStatus("accepted");
         offerRepository.save(offer);
-
+List<Offer> otherOffer = offerRepository.findOffersByProjectIdAndAndStatus(offer.getProjectId(),"pending");
+for(Offer o :otherOffer){
+    if (!o.getOfferId().equals(offer.getOfferId())){
+        o.setStatus("rejected");
+    }
+}
+offerRepository.saveAll(otherOffer);
     }
 
     //compare offers for same project order by budget
