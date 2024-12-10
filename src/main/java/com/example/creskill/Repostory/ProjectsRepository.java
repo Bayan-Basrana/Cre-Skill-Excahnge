@@ -32,4 +32,6 @@ public interface ProjectsRepository extends JpaRepository<Projects, Integer> {
 
     @Query ("select p.requiredSkills from Projects p where p.projectId=?1")
     List<String> findRequiredSkills (Integer projectId);
+     @Query("select p from Projects p where p.projectId=?1 and p.talentId=?2")
+    Projects findProjectsByProjectIdAndAndTalentId (Integer projectId , Integer talentId);
 }
